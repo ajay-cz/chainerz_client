@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+    <title>Chain of Custody - Dashboard</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+<nav class="grey darken-3" role="navigation">
+    <div class="nav-wrapper container">
+        <a id="logo-container" href="/" class="brand-logo">
+            <img src="//blockchainerz.com/images/brands.png">
+        </a>
+        <ul class="right hide-on-med-and-down">
+            <li><a class="white-text" href="/">Home</a></li>
+            <li><a class="white-text" href="#!">Admin Dashboard</a></li>
+            <li><a class="white-text" href="#!">Producer Dashboard</a></li>
+            <li><a class="white-text" href="#!">Consumer Dashboard</a></li>
+        </ul>
+
+        <ul id="nav-mobile" class="side-nav">
+            <li><a class="black-text" href="/">Home</a></li>
+            <li><a class="black-text" href="#!">Admin Dashboard</a></li>
+            <li><a class="black-text" href="#!">Producer Dashboard</a></li>
+            <li><a class="black-text" href="#!">Consumer Dashboard</a></li>
+        </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+</nav>
+<div class="section no-pad-bot" id="index-banner">
+    <div class="container center">
+        <h4>Login</h4>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <form class="col s12 center" id="login_form">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="id" type="text" class="validate" required>
+                    <label for="id">ID</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="password" type="password" class="validate" required>
+                    <label for="password">Password</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <select id="userRole" name="userRole" required>
+                        <option value="" disabled selected>Choose your Role</option>
+                        <option value="producer" data-icon="images/producer.jpg" class="circle">Producer (Farmer)</option>
+                        <option value="wholesaler" data-icon="images/wholesaler.jpg" class="circle">Supplier (Mandi Agent)</option>
+                        <option value="consumer" data-icon="images/consumer.jpg" class="circle">Consumer (End Customer)</option>
+                        <option value="admin_dashboard" data-icon="images/admin.jpg" class="circle">Regulator (Super Admin)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <button class="btn waves-effect waves-teal" type="submit">Submit
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<footer class="page-footer grey darken-1">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">ChainerZ</h5>
+                <p class="grey-text text-lighten-4"></p>
+            </div>
+            <div class="col l3 s12" id="footer_links">
+                <h5 class="white-text">Actions</h5>
+                <ul>
+                    <li><a class="black-text" href="/">Home</a></li>
+                    <li><a class="black-text" href="#!">Admin Dashboard</a></li>
+                    <li><a class="black-text" href="#!">Producer Dashboard</a></li>
+                    <li><a class="black-text" href="#!">Consumer Dashboard</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            Made by <a class="orange-text text-lighten-3" href="#">ChainerZ</a>
+        </div>
+    </div>
+</footer>
+
+
+<!--  Scripts-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="js/materialize.js"></script>
+<script src="js/init.js"></script>
+<script>
+    $('#login_form').off('submit').on('submit', function (event) {
+        var selectedRole = $(this).find('#userRole');
+        event.stopPropagation();
+        event.preventDefault();
+        if(selectedRole && selectedRole[0] && selectedRole[0].value){
+            location.href = '/' + selectedRole[0].value + '.html'
+        }
+    })
+</script>
+</body>
+</html>
