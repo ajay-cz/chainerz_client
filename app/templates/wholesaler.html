@@ -1,0 +1,133 @@
+{% extends "base_template.html" %}
+
+{%- block container -%}
+<div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+        Wholesaler Dashboard
+    </div>
+</div>
+
+<div class="container" ng-app="consumerApp" ng-controller="consumerCtrl">
+    <div class="card m4 center"><i class="material-icons ">account_balance_wallet</i> Wallet Address: <b>0xC5fdf4076b8F3A5357c5E395ab970B5B54098Fef</b></div>
+    <div class="row">
+        <div class="card col s6" ng-cloak="">
+            <div class="card-content">
+            <p class="center">From Producer</p>
+            </div>
+            <div class="card-tabs">
+                <ul class="tabs tabs-fixed-width">
+                    <li class="tab"><a class="active" href="#transactions">Transactions</a></li>
+                    <li class="tab"><a href="#payments">Payments</a></li>
+                </ul>
+            </div>
+            {% raw %}
+                <div class="card-content grey lighten-5">
+                <div id="transactions">
+                    <table class="highlight">
+                        <thead>
+                        <tr>
+                            <th>Item Name</th>
+                            <th>Item Price</th>
+                            <th>Item Origin</th>
+                            <th>Trace</th>
+                            <th>Forward Lot</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr ng-repeat="item in items track by $index" ng-click="onSelectTransaction($index)">
+                            <td>{{item.name}}</td>
+                            <td>{{item.price}}</td>
+                            <td>{{item.origin.place_name}}</td>
+                            <td>
+                                <span class="center">
+                                    <i class="material-icons green-text">directions</i>
+                                </span>
+                            </td>
+                            <td>
+                                <ul id="fwd_this_{{$index}}" class="side-nav">
+                                    <div class="col s6 m6" style="padding: 10px">
+                                        <div class="card">
+                                            <h5 class=" center header">Consumer</h5>
+                                            <div class="    ">
+                                                <div class="card-content">
+                                                    <i class="material-icons ">account_balance_wallet</i> Wallet Address: 0x8cdaf0cd259887258bc13a92c0a6da92698644c0
+                                                </div>
+                                                <div class="card-action center">
+                                                    <a href="#" ng-click="initiateTransaction($index)">Initiate SmartContract Transaction</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row s6 m6 " style="padding: 10px">
+                                        <div class="card " ng-show="transactionInitiated">
+                                            <h5 class="header center">TX #</h5>
+                                            <div class="center">
+                                                <a href="/consumer?txn=0x059cf1bbc372b9348ce487de910358801bbbd1c89182853439bec0afaee6c7db">0x059cf1bbc372b9348ce487de910358801bbbd1c89182853439bec0afaee6c7db</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ul>
+                                <a class="waves-effect waves-light waves-green fwd_this" data-activates="fwd_this_{{$index}}" id="ship_{{$index}}">Forward Lot</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="payments"></div>
+            </div>
+            {% endraw %}
+
+        </div>
+        <div class="card col s6" ng-cloak="">
+            <div class="card-content">
+            <p class="center">To Consumer</p>
+            </div>
+            <div class="card-tabs">
+                <ul class="tabs tabs-fixed-width">
+                    <li class="tab"><a class="active" href="#transactions_c">Transactions</a></li>
+                    <li class="tab"><a href="#payments_c">Payments</a></li>
+                </ul>
+            </div>
+            {% raw %}
+                <div class="card-content grey lighten-5">
+                <div id="transactions_c">
+                    <table class="highlight">
+                        <thead>
+                        <tr>
+                            <th>Item Name</th>
+                            <th>Item Price</th>
+                            <th>Item Origin</th>
+                            <th>Trace</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr ng-repeat="item in items track by $index" ng-click="onSelectTransaction($index)">
+                            <td>{{item.name}}</td>
+                            <td>{{item.price}}</td>
+                            <td>{{item.origin.place_name}}</td>
+                            <td>
+                                <span class="center">
+                                    <i class="material-icons green-text">directions</i>
+                                </span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="payments_c"></div>
+            </div>
+            {% endraw %}
+
+        </div>
+    </div>
+</div>
+{%- endblock -%}
+{% block scripts %}
+    {{ super() }}
+  <script src="/static/js/consumer.js"></script>
+{%- endblock -%}
+{% block initscripts %}
+    {{ super() }}
+{%- endblock -%}

@@ -1,0 +1,160 @@
+{% extends "base_template.html" %}
+
+{%- block container -%}
+<div class="section no-pad-bot" id="index-banner" >
+    <div class="container">
+        <h4>Producer</h4>
+    </div>
+</div>
+
+<div class="container" ng-app="producerApp" ng-controller="producerCtrl">
+    <div class="card col-md-4 center"><i class="material-icons ">account_balance_wallet</i> Wallet Address: <b>0x627306090abab3a6e1400e9345bc60c78a8bef57</b></div>
+    <div class="card" ng-cloak="">
+        <!--<div class="card-content">-->
+            <!--<h5>Vault</h5>-->
+        <!--</div>-->
+        <div class="card-tabs">
+            <ul class="tabs tabs-fixed-width">
+                <li class="tab"><a class="active" href="#produce">Produce Info</a></li>
+                <!--<li class="tab"><a href="#certs">Purchase Orders</a></li>-->
+                <li class="tab"><a href="#transactions">Transactions</a></li>
+                <li class="tab"><a href="#payments">Payments</a></li>
+            </ul>
+        </div>
+        {% raw %}
+
+        <div class="card-content grey lighten-5">
+            <div id="produce">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Lot #</th>
+                        <th>Item Name</th>
+                        <th>Lot Price</th>
+                        <th>Lot Classification</th>
+                        <th>Lot Qty</th>
+                        <th>Verification</th>
+                        <th> </th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr ng-repeat="item in items track by $index">
+                            <td>{{item.lot_id}}</td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.price}}</td>
+                            <td>{{item.unit}}</td>
+                            <td>{{item.qty}}</td>
+                            <td>{{AUDIT_STATUS_MAP[item.audit_status || 0]}}
+                                <span class="center">
+                                <i class="material-icons green-text" ng-if="item.audit_status > 1">check_circle</i>
+                                <i class="material-icons red-text" ng-if="item.audit_status < 2">radio_button_unchecked</i>
+                                </span>
+                            </td>
+                            <td>
+                                <!--<i class="material-icons">mode_edit</i>-->
+                                <!--<i class="material-icons">mode_delete</i>-->
+                                <ul id="ship_this_{{$index}}" class="side-nav">
+                                    <div class="col s6 m6" style="padding: 10px">
+                                        <div class="card">
+                                            <h5 class=" center header">Consumer</h5>
+                                            <div class="    ">
+                                                <div class="card-content">
+                                                    <i class="material-icons ">account_balance_wallet</i> Wallet Address: 0x8cdaf0cd259887258bc13a92c0a6da92698644c0
+                                                </div>
+                                                <div class="card-action center">
+                                                    <a href="#" ng-click="initiateTransaction($index)">Initiate SmartContract Transaction</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col s6 m6 " style="padding: 10px">
+                                        <div class="card ">
+                                            <h5 class="center header">Wholesaler / Intermediary</h5>
+                                            <div class="card-stacked">
+                                                <div class="card-content">
+                                                    <i class="material-icons ">account_balance_wallet</i> Wallet Address: 0xC5fdf4076b8F3A5357c5E395ab970B5B54098Fef
+                                                </div>
+                                                <div class="card-action center">
+                                                    <a href="#" ng-click="initiateTransaction($index)">Initiate SmartContract Transaction</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row s6 m6 " style="padding: 10px">
+                                        <div class="card " ng-show="transactionInitiated">
+                                            <h5 class="header center">TX #</h5>
+                                            <div class="center">
+                                                <a href="/consumer?txn=0x059cf1bbc372b9348ce487de910358801bbbd1c89182853439bec0afaee6c7db">0x059cf1bbc372b9348ce487de910358801bbbd1c89182853439bec0afaee6c7db</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ul>
+                                <button ng-if="item.audit_status > 1" class="waves-effect waves-light btn waves-green pull-right ship_this" data-activates="ship_this_{{$index}}" id="ship_{{$index}}" ng-click="initiateShipment($index)">Ship this Lot</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="btn-floating btn-large waves-effect waves-light modal-trigger red pull-right" disabled data-target="addItemModal" ng-click="openModal = true"><i class="material-icons">add</i></button>
+            </div>
+            <div id="certs">
+
+            </div>
+            <div id="transactions">
+
+            </div>
+            <div id="payments"></div>
+        </div>
+
+
+
+        {% endraw %}
+
+    </div>
+</div>
+
+
+<div id="addItemModal" class="modal">
+    <div class="modal-content">
+        <h4>Add Product</h4>
+        <div class="row">
+            <form class="col s12" id="addProduce" ng-submit="addItem(formItem)">
+                <div class="row">
+                    <div class="input-field col s3">
+                        <input placeholder="Product Name" id="lot_id" type="text" class="validate" ng-model="formItem.name">
+                        <label for="product_name">Lot #</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input placeholder="Product Name" id="product_name" type="text" class="validate" ng-model="formItem.name">
+                        <label for="product_name">Product Name</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input placeholder="Product Unit" id="product_unit" type="text" class="validate" ng-model="formItem.unit">
+                        <label for="product_unit">Product Unit</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input id="product_qty" type="text" class="validate" ng-model="formItem.qty" placeholder="Product Qty Per Lot">
+                        <label for="product_qty">Product Qty per Lot</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input id="product_price" type="text" class="validate" ng-model="formItem.price" placeholder="Product Price Per Lot">
+                        <label for="product_price">Product Price Per Lot</label>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="modal-action waves-effect waves-green btn-flat" ng-click="addItem(formItem)">Save</button>
+    </div>
+</div>
+{%- endblock -%}
+
+{% block scripts %}
+    {{ super() }}
+  <script src="/static/js/producer.js"></script>
+
+{%- endblock -%}
+{% block initscripts %}
+    {{ super() }}
+{%- endblock -%}

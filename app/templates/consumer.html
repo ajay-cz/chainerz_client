@@ -1,0 +1,86 @@
+{% extends "base_template.html" %}
+{%- block container -%}
+<div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+        Consumer Dashboard
+    </div>
+</div>
+
+<div class="container" ng-app="consumerApp" ng-controller="consumerCtrl">
+    <div class="card col-md-4 center"><i class="material-icons ">account_balance_wallet</i> Wallet Address: <b>0x8cdaf0cd259887258bc13a92c0a6da92698644c0</b></div>
+    <div class="row">
+        <div class="card" ng-cloak="">
+            <!--<div class="card-content">-->
+            <!--<h5>Vault</h5>-->
+            <!--</div>-->
+            <div class="card-tabs">
+                <ul class="tabs tabs-fixed-width">
+                    <li class="tab"><a class="active" href="#transactions">Transactions</a></li>
+                    <li class="tab"><a href="#payments">Payments</a></li>
+                </ul>
+            </div>
+            {% raw %}
+                <div class="card-content grey lighten-5">
+                <div id="transactions">
+                    <table class="highlight">
+                        <thead>
+                        <tr>
+                            <th>Txn Hash</th>
+                            <th>Item Name</th>
+                            <th>Item Price</th>
+                            <th>Item Origin</th>
+                            <th>Trace</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr ng-repeat="item in items track by $index" ng-click="onSelectTransaction($index)">
+                            <td>{{item.txn}}</td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.price}}</td>
+                            <td>{{item.origin.place_name}}</td>
+                            <td>
+                                <span class="center">
+                                    <i class="material-icons green-text">directions</i>
+                                </span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="payments"></div>
+            </div>
+            {% endraw %}
+
+        </div>
+    </div>
+    {%- raw -%}
+        <div class="row" ng-show="selectedItem">
+        <div class="timeline">
+            <div class="timeline-event" ng-repeat="checkpoint in selectedItem.trace">
+                <div class="card timeline-content">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th class="center deep-orange accent-1"><i class="material-icons">place</i> Checkpoint</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="center">{{checkpoint.place_name}} ( {{checkpoint.lat}}, {{checkpoint.lng}})</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="timeline-badge blue white-text"><i class="material-icons">language</i></div>
+            </div>
+
+        </div>
+    </div>
+    {%- endraw -%}
+</div>
+{%- endblock -%}
+{% block scripts %}
+    {{ super() }}
+  <script src="/static/js/consumer.js"></script>
+{%- endblock -%}

@@ -12,7 +12,7 @@
 </head>
 <body>
 <nav class="grey darken-3" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo"><img src="//blockchainerz.com/images/brands.png"></a>
+    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo"><img src="//blockchainerz.com/images/brands.png"></a>
         <ul class="right hide-on-med-and-down">
             <li><a class="white-text" href="/">Home</a></li>
             <li><a class="white-text" href="#!">Admin Dashboard</a></li>
@@ -43,7 +43,7 @@
         <div class="card-tabs">
             <ul class="tabs tabs-fixed-width">
                 <li class="tab"><a class="active" href="#produce">Produce Info</a></li>
-                <li class="tab"><a href="#certs">Certifications</a></li>
+                <!--<li class="tab"><a href="#certs">Purchase Orders</a></li>-->
                 <li class="tab"><a href="#transactions">Transactions</a></li>
                 <li class="tab"><a href="#payments">Payments</a></li>
             </ul>
@@ -57,6 +57,7 @@
                         <th>Lot Price</th>
                         <th>Lot Classification</th>
                         <th>Lot Qty</th>
+                        <th>Verification</th>
                         <th> </th>
                     </tr>
                     </thead>
@@ -67,14 +68,21 @@
                             <td>{{item.price}}</td>
                             <td>{{item.unit}}</td>
                             <td>{{item.qty}}</td>
+                            <td>{{AUDIT_STATUS_MAP[item.audit_status || 0]}}
+                                <span class="center">
+                                <i class="material-icons green-text" ng-if="item.audit_status > 1">check_circle</i>
+                                <i class="material-icons red-text" ng-if="item.audit_status < 2">radio_button_unchecked</i>
+                                </span>
+                            </td>
                             <td>
-                                <i class="material-icons">mode_edit</i>
-                                <i class="material-icons">mode_delete</i>
+                                <!--<i class="material-icons">mode_edit</i>-->
+                                <!--<i class="material-icons">mode_delete</i>-->
+                                <button ng-if="item.audit_status > 1" class="waves-effect waves-light btn waves-green pull-right ship_this" id="ship_{{$index}}" ng-click="initiateShipment($index)">Ship this Lot</button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <button class="btn-floating btn-large waves-effect waves-light modal-trigger red pull-right" data-target="addItemModal" ng-click="openModal = true"><i class="material-icons">add</i></button>
+                <button class="btn-floating btn-large waves-effect waves-light modal-trigger red pull-right" disabled data-target="addItemModal" ng-click="openModal = true"><i class="material-icons">add</i></button>
             </div>
             <div id="certs">
 

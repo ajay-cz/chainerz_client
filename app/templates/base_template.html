@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Chain of Custody</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="/static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="/static/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="/static/css/timeline.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+  <nav class="grey darken-3" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo"><img src="http://blockchainerz.com/images/brands.png"></a>
+      <ul class="right hide-on-med-and-down">
+        <li><a class="white-text" href="/">Home</a></li>
+        <li><a class="white-text" href="#!">Admin Dashboard</a></li>
+        <li><a class="white-text" href="#!">Producer Dashboard</a></li>
+        <li><a class="white-text" href="#!">Consumer Dashboard</a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <li><a class="black-text" href="/">Home</a></li>
+        <li><a class="black-text" href="#!">Admin Dashboard</a></li>
+        <li><a class="black-text" href="#!">Producer Dashboard</a></li>
+        <li><a class="black-text" href="#!">Consumer Dashboard</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  {%- block container -%}
+
+  {%- endblock -%}
+  <footer class="page-footer grey darken-1">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">ChainerZ</h5>
+          <p class="grey-text text-lighten-4"></p>
+        </div>
+        <div class="col l3 s12" id="footer_links">
+          <h5 class="white-text">Actions</h5>
+          <ul>
+            <li><a class="black-text" href="/">Home</a></li>
+            <li><a class="black-text" href="#!">Admin Dashboard</a></li>
+            <li><a class="black-text" href="#!">Producer Dashboard</a></li>
+            <li><a class="black-text" href="#!">Consumer Dashboard</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      Made by <a class="orange-text text-lighten-3" href="#">ChainerZ</a>
+      </div>
+    </div>
+  </footer>
+
+  {% block scripts %}
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="/static/js/truffle-contract.js"></script>
+  <script src="/static/js/web3.min.js"></script>
+  <script src="/static/js/app.js"></script>
+  <script src="/static/js/materialize.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script>
+  {% endblock %}
+  {% block initscripts %}
+      <script src="/static/js/init.js"></script>
+  {% endblock %}
+  </body>
+</html>

@@ -1,0 +1,33 @@
+[
+  {
+    "lot_id": "00743c21-b818-4b3f-a10a-d3ab138b58c3",
+    "name": "Mango Variety 1",
+    "price": "1000",
+    "unit": "KG",
+    "qty": "10",
+    "audit_status": 0
+  },
+  {
+    "lot_id": "842d8e9b-5716-4010-95a8-3c97050b3c9e",
+    "name": "Mango Variety 2",
+    "price": "700",
+    "unit": "KG",
+    "qty": "100",
+    "audit_status": 1
+  },
+  {
+    "lot_id": "9e9e9170-aa03-4c50-8b0c-6b06475afa3e",
+    "name": "Grape Variety 1",
+    "price": "9000",
+    "unit": "KG",
+    "qty": "100",
+    "audit_status": 2
+  },
+  {
+    "lot_id": "88615dba-ac08-476d-8c13-d89bb783676a",
+    "name": "Apple Variety 1",
+    "price": "1500",
+    "unit": "KG",
+    "qty": "100",
+    "audit_status": 2
+  }]

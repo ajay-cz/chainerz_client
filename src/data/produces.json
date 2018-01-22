@@ -1,0 +1,29 @@
+[
+  {
+    "name": "Mango Variety 1",
+    "price": "1000",
+    "unit": "KG",
+    "qty": "10",
+    "audit_status": 0
+  },
+  {
+    "name": "Mango Variety 2",
+    "price": "700",
+    "unit": "KG",
+    "qty": "100",
+    "audit_status": 1
+  },
+  {
+    "name": "Grape Variety 1",
+    "price": "9000",
+    "unit": "KG",
+    "qty": "100",
+    "audit_status": 2
+  },
+  {
+    "name": "Apple Variety 1",
+    "price": "1500",
+    "unit": "KG",
+    "qty": "100",
+    "audit_status": 2
+  }]

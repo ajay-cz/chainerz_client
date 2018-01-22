@@ -1,0 +1,58 @@
+{% extends "base_template.html" %}
+
+{%- block container -%}
+<div class="section no-pad-bot" id="index-banner">
+    <div class="container center">
+        <h4>Login</h4>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <form class="col s12 center" id="login_form">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="id" type="text" class="validate" disabled placeholder="test">
+                    <label for="id">ID</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="password" type="password" class="validate" disabled placeholder="test">
+                    <label for="password">Password</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <select id="userRole" name="userRole" required>
+                        <option value="" disabled selected>Choose your Role</option>
+                        <option value="producer" data-icon="/static/images/producer.jpg" class="circle">Producer (Farmer)</option>
+                        <option value="wholesaler" data-icon="/static/images/wholesaler.jpg" class="circle">Supplier (Mandi Agent)</option>
+                        <option value="consumer" data-icon="/static/images/consumer.jpg" class="circle">Consumer (End Customer)</option>
+                        <option value="admin_dashboard" data-icon="/static/images/admin.jpg" class="circle">Regulator (Super Admin)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <button class="btn waves-effect waves-teal" type="submit">Submit
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{%- endblock -%}
+{%- block scripts -%}
+    {{ super() }}
+    <script>
+        $('#login_form').off('submit').on('submit', function (event) {
+            var selectedRole = $(this).find('#userRole');
+            event.stopPropagation();
+            event.preventDefault();
+            if(selectedRole && selectedRole[0] && selectedRole[0].value){
+                location.href = '/' + selectedRole[0].value
+            }
+        })
+    </script>
+{%- endblock scripts -%}
