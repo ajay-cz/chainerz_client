@@ -1,8 +1,8 @@
 # Steps to Install & run
 ----
 ## Prerequisites:
-  Python
-  A Browser with MetaMask / Mist
+ 
+ Python & A Browser with MetaMask / Mist
 ----
 ## Ethereum Network Info Deployed on Azure
   http://mangodwwskuk.eastus.cloudapp.azure.com/
